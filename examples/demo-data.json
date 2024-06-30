@@ -1,0 +1,107 @@
+[
+  {
+    "area": "华北",
+    "province": "北京",
+    "city": "北京",
+    "store": "密云分店",
+    "sales": 72
+  },
+  {
+    "area": "华中",
+    "province": "湖北",
+    "city": "武汉",
+    "store": "江城旗舰店",
+    "sales": 21
+  },
+  {
+    "area": "华北",
+    "province": "北京",
+    "city": "北京",
+    "store": "朝阳旗舰店",
+    "sales": 123
+  },
+  {
+    "area": "上海总部",
+    "province": "上海总部",
+    "city": "上海总部",
+    "store": "静安区分公司",
+    "sales": 12
+  },
+  {
+    "area": "华中",
+    "province": "湖北",
+    "city": "武汉",
+    "store": "琴断口街加盟店",
+    "sales": 42
+  },
+  {
+    "area": "华北",
+    "province": "北京",
+    "city": "北京",
+    "store": "香山店",
+    "sales": 56
+  },
+  {
+    "area": "华南",
+    "province": "广东",
+    "city": "广州",
+    "store": "花城店",
+    "sales": 90
+  },
+  {
+    "area": "华南",
+    "province": "广西",
+    "city": "桂林",
+    "store": "甲天下旗舰店",
+    "sales": 15
+  },
+  {
+    "area": "华中",
+    "province": "湖北",
+    "city": "武汉",
+    "store": "汉阳造体验店",
+    "sales": 54
+  },
+  {
+    "area": "华南",
+    "province": "广东",
+    "city": "东莞",
+    "store": "东莞东汽车站分店",
+    "sales": 35
+  },
+  {
+    "area": "华南",
+    "province": "广东",
+    "city": "深圳",
+    "store": "华强北工厂店",
+    "sales": 85
+  },
+  {
+    "area": "上海总部",
+    "province": "上海总部",
+    "city": "上海总部",
+    "store": "上海总部中心",
+    "sales": 117
+  },
+  {
+    "area": "华南",
+    "province": "广东",
+    "city": "东莞",
+    "store": "东莞汽车东站分店",
+    "sales": 26
+  },
+  {
+    "area": "华北",
+    "province": "河北",
+    "city": "石家庄",
+    "store": "常山紫龙加盟店",
+    "sales": 15
+  },
+  {
+    "area": "华南",
+    "province": "广东",
+    "city": "广州",
+    "store": "越来越秀旗舰店",
+    "sales": 60
+  }
+]

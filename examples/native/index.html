@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Native Table</title>
+  <style>
+    body {
+      font: normal 14px/1.5 Tahoma, 'Microsoft Yahei';
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: .5em 1em;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>大区</th>
+        <th>省/直辖市</th>
+        <th>城市</th>
+        <th>网点</th>
+        <th>销售额（万元）</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <script type="module">
+    import MergeTableCells from '../../dist/merge-table-cells.js';
+    import respData from '../demo-data.json';
+
+    const mergeHandle = new MergeTableCells(['area', 'province', 'city']);
+    const tableData = mergeHandle.format(respData);
+
+    document.getElementById('tbody').innerHTML = tableData.map((row) => {
+      const columns = ['area', 'province', 'city', 'store', 'sales'].map((key) => {
+        const { rowspan, colspan } = mergeHandle.span(key, row);
+
+        return [rowspan, colspan].includes(0) ? '' : `
+          <td rowspan="${rowspan}" colspan="${colspan}">${row[key]}</td>
+        `;
+      }).join('\n');
+
+      return `<tr>${columns}</tr>`;
+    }).join('\n');
+  </script>
+</body>
+</html>
