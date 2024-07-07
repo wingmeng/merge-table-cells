@@ -4,7 +4,7 @@ import ColspanOnly from './views/colspan-only.vue';
 import BothMerge from './views/both-merge.vue';
 import CustomSortTable from './views/custom-sort.vue';
 import WithOrderNumber from './views/with-order-number.vue';
-import respData from '../../demo-data.json';
+import respData from '@local/test-data';
 
 const getData = () => structuredClone(respData);
 </script>

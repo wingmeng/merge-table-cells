@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TiTableColumns, TiTableRowData, TiTableSrcData } from '@opentiny/ng';
-import respData from '../../../demo-data.json';
-import MergeTableCells from '../../../../lib/main';
+import testData from '@local/test-data';
+import MergeTableCells from 'merge-table-cells';
 
 const mergeHandle = new MergeTableCells(['area', 'province', 'city']);
 
@@ -13,7 +13,7 @@ const mergeHandle = new MergeTableCells(['area', 'province', 'city']);
 export class AppComponent {
   displayedData: Array<TiTableRowData> = [];
   srcData: TiTableSrcData = {
-    data: mergeHandle.format(structuredClone(respData)),
+    data: mergeHandle.format(structuredClone(testData)),
     state: {
       searched: false,
       paginated: false,

@@ -1,30 +1,23 @@
 {
-  "name": "merge-table-cells",
+  "name": "merge-table-cells-project",
   "version": "0.1.0",
   "type": "module",
-  "files": [
-    "dist",
-    "index.d.ts"
-  ],
-  "main": "./dist/merge-table-cells.umd.cjs",
-  "module": "./dist/merge-table-cells.js",
-  "types": "./index.d.ts",
-  "exports": {
-    "types": "./index.d.ts",
-    "import": "./dist/merge-table-cells.js",
-    "require": "./dist/merge-table-cells.umd.cjs"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "concurrently \"npm run start:angular\" \"npm run start:vue2\" \"npm run start:vue3\" \"npm run dev\"",
-    "start:vue3": "cd examples/vue3-elementplus && npm run dev",
-    "start:vue2": "cd examples/vue2-elementui && npm run serve",
-    "start:angular": "cd examples/angular-tinyui && npm run start"
+    "start": "concurrently \"npm run start:vue3\" \"npm run start:native\" \"npm run start:vue2\" \"npm run start:angular\" \"npm run start:react\" \"npm run dev\"",
+    "start:angular": "cd examples/angular-tinyng && npm run start",
+    "start:native": "cd examples/native && npm run dev",
+    "start:react": "cd examples/react && npm run start",
+    "start:vue2": "cd examples/vue2-elementui && npm run dev",
+    "start:vue3": "cd examples/vue3-elementplus && npm run dev"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
     "concurrently": "^8.2.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "vite": "^5.2.10",
+    "vue": "^3.4.29",
+    "vue-tsc": "^2.0.21"
   }
 }

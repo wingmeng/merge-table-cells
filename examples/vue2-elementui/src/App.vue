@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import respData from '../../demo-data.json';
-import MergeTableCells from '../../../dist/merge-table-cells';
+import testData from '@local/test-data';
+import MergeTableCells from 'merge-table-cells';
 
 const mergeHandle = new MergeTableCells(['area', 'province', 'city']);
 
@@ -20,7 +20,7 @@ export default {
   name: 'App',
   data() {
     return {
-      tableData: mergeHandle.format(respData)
+      tableData: mergeHandle.format(testData)
     }
   },
   methods: {

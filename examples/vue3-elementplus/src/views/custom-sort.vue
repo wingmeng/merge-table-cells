@@ -1,12 +1,10 @@
 <script setup>
-import { inject } from 'vue';
+import MergeTableCells from 'merge-table-cells'
 import { ElTable, ElTableColumn } from 'element-plus';
 
 const props = defineProps({
   data: Array
 });
-const MergeTableCells = inject('MergeTableCells');
-
 const mergeHandle = new MergeTableCells(['area', 'province', 'city']);
 const topValueMapping = ['area', 'province', 'city'].reduce((obj, k) => {
   obj[k] = '上海总部';

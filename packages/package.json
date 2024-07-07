@@ -1,0 +1,33 @@
+{
+  "name": "merge-table-cells",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "main": "./dist/merge-table-cells.umd.cjs",
+  "module": "./dist/merge-table-cells.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/merge-table-cells.js",
+    "require": "./dist/merge-table-cells.umd.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wingmeng/your-package-name.git"
+  },
+  "keywords": [
+    "merge table cell",
+    "span cell",
+    "colspan",
+    "rowspan"
+  ],
+  "author": "wingmeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wingmeng/your-package-name/issues"
+  },
+  "homepage": "https://github.com/wingmeng/your-package-name#readme"
+}
