@@ -97,10 +97,16 @@ export default class MergeTableCells {
             return true;
           }
 
-          // 跨行数相同的列才能跨列合并
-          return row[k] === row[combo[i - 1]] &&
-            rowspanInfo[k] > 0 &&
-            rowspanInfo[k] === rowspanInfo[combo[i - 1]];
+          const isSameCol = row[k] === row[combo[i - 1]];
+
+          if (typeof rowspanInfo[k] === 'number') {
+            // 跨行数相同的列才能跨列合并
+            return isSameCol &&
+              rowspanInfo[k] > 0 &&
+              rowspanInfo[k] === rowspanInfo[combo[i - 1]];
+          }
+
+          return row[k] === row[combo[i - 1]];
         });
 
         if (matched) {

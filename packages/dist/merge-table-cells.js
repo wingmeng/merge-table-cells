@@ -1,82 +1,87 @@
-var M = Object.defineProperty;
-var D = (o, n, t) => n in o ? M(o, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : o[n] = t;
-var i = (o, n, t) => D(o, typeof n != "symbol" ? n + "" : n, t);
-function E(o, n) {
-  const { count: t = 0, children: r = /* @__PURE__ */ new Map() } = o.get(n) || {};
-  return o.set(n, { count: t + 1, children: r }), o.get(n);
+var m = Object.defineProperty;
+var M = (a, t, n) => t in a ? m(a, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : a[t] = n;
+var p = (a, t, n) => M(a, typeof t != "symbol" ? t + "" : t, n);
+function S(a, t) {
+  const { count: n = 0, children: o = /* @__PURE__ */ new Map() } = a.get(t) || {};
+  return a.set(t, { count: n + 1, children: o }), a.get(t);
 }
-function I(o) {
-  const n = [];
-  if (o.length < 2)
-    return n;
-  for (let t = 0; t < o.length; t++)
-    for (let r = t + 1; r < o.length; r++) {
-      const u = o.slice(t, r + 1);
-      u.length >= 2 && n.push(u);
+function D(a) {
+  const t = [];
+  if (a.length < 2)
+    return t;
+  for (let n = 0; n < a.length; n++)
+    for (let o = n + 1; o < a.length; o++) {
+      const f = a.slice(n, o + 1);
+      f.length >= 2 && t.push(f);
     }
-  return n.sort((t, r) => r.length - t.length);
+  return t.sort((n, o) => o.length - n.length);
 }
 class j {
-  constructor(n) {
-    i(this, "mergeKeys", {
+  constructor(t) {
+    p(this, "mergeKeys", {
       rowspan: [],
       colspan: []
     });
-    i(this, "alias", "_span");
-    const t = Array.isArray(n) ? {
-      rowspan: n,
-      colspan: n
-    } : n;
-    this.mergeKeys.rowspan = (t == null ? void 0 : t.rowspan) || [], this.mergeKeys.colspan = (t == null ? void 0 : t.colspan) || [];
+    p(this, "alias", "_span");
+    const n = Array.isArray(t) ? {
+      rowspan: t,
+      colspan: t
+    } : t;
+    this.mergeKeys.rowspan = (n == null ? void 0 : n.rowspan) || [], this.mergeKeys.colspan = (n == null ? void 0 : n.colspan) || [];
   }
-  format(n, t) {
-    const { rowspan: r, colspan: u } = this.mergeKeys, g = (s, a) => {
-      if (typeof t == "function")
-        return t(s, a);
-      for (let c of r) {
-        const e = String(s[c] ?? ""), h = String(a[c] ?? "");
+  format(t, n) {
+    const { rowspan: o, colspan: f } = this.mergeKeys, i = (s, r) => {
+      if (typeof n == "function")
+        return n(s, r);
+      for (let l of o) {
+        const e = String(s[l] ?? ""), h = String(r[l] ?? "");
         if (e !== h)
           return e.localeCompare(h);
       }
       return 0;
-    }, d = [...n].sort(g), K = d.reduce((s, a) => (r.reduce(
-      (c, e) => E(c.children || s, a[e]),
+    }, d = [...t].sort(i), y = d.reduce((s, r) => (o.reduce(
+      (l, e) => S(l.children || s, r[e]),
       {}
-    ), s), /* @__PURE__ */ new Map()), v = (s) => r.reduce((a, c, e) => (e === 0 ? a.push(K.get(s[c])) : a.push(a[e - 1].children.get(s[c])), a), []), y = I(u), w = (s, a) => {
-      const c = {};
-      for (let e of y)
-        if (e.every((f, l) => l === 0 ? !0 : a[f] === a[e[l - 1]] && s[f] > 0 && s[f] === s[e[l - 1]])) {
-          e.forEach((f, l) => {
-            c[f] = l === 0 ? e.length : 0;
+    ), s), /* @__PURE__ */ new Map()), C = (s) => o.reduce((r, l, e) => (e === 0 ? r.push(y.get(s[l])) : r.push(r[e - 1].children.get(s[l])), r), []), K = D(f), b = (s, r) => {
+      const l = {};
+      for (let e of K)
+        if (e.every((u, c) => {
+          if (c === 0)
+            return !0;
+          const g = r[u] === r[e[c - 1]];
+          return typeof s[u] == "number" ? g && s[u] > 0 && s[u] === s[e[c - 1]] : r[u] === r[e[c - 1]];
+        })) {
+          e.forEach((u, c) => {
+            l[u] = c === 0 ? e.length : 0;
           });
           break;
         }
-      return c;
+      return l;
     };
-    return d.map((s, a, c) => {
+    return d.map((s, r, l) => {
       const e = {
         rowspan: {},
         colspan: {}
-      }, h = v(s);
-      if (a === 0)
-        return r.forEach((l, p) => {
-          e.rowspan[l] = h[p].count;
-        }), e.colspan = w(e.rowspan, s), s[this.alias] = e, s;
-      const f = (l) => s[l] === c[a - 1][l];
-      return r.reduce((l, p, C) => {
-        const b = l && f(p);
-        return e.rowspan[p] = b ? 0 : h[C].count, b;
-      }, !0), e.colspan = w(e.rowspan, s), s[this.alias] = e, s;
+      }, h = C(s);
+      if (r === 0)
+        return o.forEach((c, g) => {
+          e.rowspan[c] = h[g].count;
+        }), e.colspan = b(e.rowspan, s), s[this.alias] = e, s;
+      const u = (c) => s[c] === l[r - 1][c];
+      return o.reduce((c, g, v) => {
+        const w = c && u(g);
+        return e.rowspan[g] = w ? 0 : h[v].count, w;
+      }, !0), e.colspan = b(e.rowspan, s), s[this.alias] = e, s;
     });
   }
-  span(n, t) {
-    const r = t[this.alias] || {}, u = {
+  span(t, n) {
+    const o = n[this.alias] || {}, f = {
       rowspan: 1,
       colspan: 1
     };
-    return Object.keys(u).forEach((g) => {
-      ({}).hasOwnProperty.call(r[g] || {}, n) && (u[g] = r[g][n]);
-    }), u;
+    return Object.keys(f).forEach((i) => {
+      ({}).hasOwnProperty.call(o[i] || {}, t) && (f[i] = o[i][t]);
+    }), f;
   }
 }
 export {
