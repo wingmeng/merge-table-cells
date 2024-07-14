@@ -1,6 +1,7 @@
 export type MergeType = 'rowspan' | 'colspan';
 export type MergeOptions = { [key in MergeType]: string[] };
 export type ChainMap = Map<string, { count: number; children: ChainMap | undefined }>;
+export interface SpanInfo { [propName: string]: number };
 
 declare class MergeTableCells {
   /**

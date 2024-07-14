@@ -1,4 +1,4 @@
-import type { MergeOptions, ChainMap, MergeType } from '../index';
+import type { MergeOptions, ChainMap, MergeType, SpanInfo } from '../index';
 
 function setItems(map: ChainMap, key: string) {
   const { count = 0, children = new Map() } = map.get(key) || {};
@@ -74,7 +74,7 @@ export default class MergeTableCells {
 
       return group;
     }, new Map());
-    const getLevelInfo = (row) => {
+    const getLevelInfo = (row: any) => {
       return rowMergeKeys.reduce((mergeArr: any[], key, i) => {
         if (i === 0) {
           mergeArr.push(groupedData.get(row[key]));
@@ -88,8 +88,8 @@ export default class MergeTableCells {
 
     // 根据跨列排至枚举相邻列
     const mergeColsCombos = buildEnumCombos(colMergeKeys);
-    const getColspanInfo = (rowspanInfo, row) => {
-      const result = {};
+    const getColspanInfo = (rowspanInfo: SpanInfo, row: any) => {
+      const result: { [propName: string]: number } = {};
 
       for (let combo of mergeColsCombos) {
         const matched = combo.every((k, i) => {
@@ -116,7 +116,7 @@ export default class MergeTableCells {
 
     // 处理表格数据（添加跨行、跨列信息）
     const tableData = orderData.map((item, index, arr) => {
-      const spanInfo = {
+      const spanInfo: { rowspan: SpanInfo, colspan: SpanInfo } = {
         rowspan: {},
         colspan: {}
       };

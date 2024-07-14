@@ -14,9 +14,16 @@
     "import": "./dist/merge-table-cells.js",
     "require": "./dist/merge-table-cells.umd.cjs"
   },
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wingmeng/your-package-name.git"
+    "url": "https://github.com/wingmeng/merge-table-cells.git"
   },
   "keywords": [
     "merge table cell",
@@ -27,7 +34,7 @@
   "author": "wingmeng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wingmeng/your-package-name/issues"
+    "url": "https://github.com/wingmeng/merge-table-cells/issues"
   },
-  "homepage": "https://github.com/wingmeng/your-package-name#readme"
+  "homepage": "https://github.com/wingmeng/merge-table-cells#readme"
 }
