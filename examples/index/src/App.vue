@@ -1,3 +1,19 @@
+<template>
+  <div>
+    <nav class="nav">
+      <a v-for="nav in navs"
+        class="link"
+        :class="statusMap[nav.tag].status"
+        href="javascript:;"
+        @click="jump(nav.tag, nav.url)"
+        :key="nav.tag">
+        <span class="title">{{ nav.title }}</span>
+        <code>./examples/{{ nav.tag }}</code>
+      </a>
+    </nav>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { reactive } from 'vue';
 
@@ -66,19 +82,3 @@ function pendingServer(item: Nav) {
   req(item.url);
 }
 </script>
-
-<template>
-  <div>
-    <nav class="nav">
-      <a v-for="nav in navs"
-        class="link"
-        :class="statusMap[nav.tag].status"
-        href="javascript:;"
-        @click="jump(nav.tag, nav.url)"
-        :key="nav.tag">
-        <span class="title">{{ nav.title }}</span>
-        <code>./examples/{{ nav.tag }}</code>
-      </a>
-    </nav>
-  </div>
-</template>

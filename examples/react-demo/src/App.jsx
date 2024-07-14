@@ -41,7 +41,7 @@ function App() {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
