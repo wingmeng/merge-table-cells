@@ -1,4 +1,4 @@
-import type { MergeOptions, ChainMap, MergeType } from '../index';
+import type { MergeOptions, ChainMap, MergeType, SpanInfo } from '../index';
 
 function setItems(map: ChainMap, key: string) {
   const { count = 0, children = new Map() } = map.get(key) || {};
@@ -26,8 +26,7 @@ function buildEnumCombos(props: Array<string>) {
   }
 
   // 组合项数最多的排前面
-  result.sort((a, b) => b.length - a.length);
-  return result;
+  return result.sort((a, b) => b.length - a.length);
 }
 
 export default class MergeTableCells {
@@ -75,42 +74,68 @@ export default class MergeTableCells {
 
       return group;
     }, new Map());
-
-    // 根据跨列排至枚举相邻列
-    const mergeColsCombos = buildEnumCombos(colMergeKeys);
-
-    // 处理表格数据（添加跨行、跨列信息）
-    const tableData = orderData.map((item, index, arr) => {
-      item[this.alias] = {
-        rowspan: {},
-        colspan: {}
-      };
-
-      const matchedCols = mergeColsCombos.find(combo =>
-        combo.every((k, i) => i === 0 ? true : item[k] === item[combo[i - 1]])
-      ) || [];
-
-      // 跨列数
-      matchedCols.forEach((k, i) => {
-        item[this.alias].colspan[k] = i === 0 ? matchedCols.length : 0;
-      });
-
-      // 获取当前层级数据
-      const levelInfoArr = rowMergeKeys.reduce((mergeArr: any[], key, i) => {
+    const getLevelInfo = (row: any) => {
+      return rowMergeKeys.reduce((mergeArr: any[], key, i) => {
         if (i === 0) {
-          mergeArr.push(groupedData.get(item[key]));
+          mergeArr.push(groupedData.get(row[key]));
         } else {
-          mergeArr.push(mergeArr[i - 1].children.get(item[key]));
+          mergeArr.push(mergeArr[i - 1].children.get(row[key]));
         }
 
         return mergeArr;
       }, []);
+    };
+
+    // 根据跨列排至枚举相邻列
+    const mergeColsCombos = buildEnumCombos(colMergeKeys);
+    const getColspanInfo = (rowspanInfo: SpanInfo, row: any) => {
+      const result: { [propName: string]: number } = {};
+
+      for (let combo of mergeColsCombos) {
+        const matched = combo.every((k, i) => {
+          if (i === 0) {
+            return true;
+          }
+
+          const isSameCol = row[k] === row[combo[i - 1]];
+
+          if (typeof rowspanInfo[k] === 'number') {
+            // 跨行数相同的列才能跨列合并
+            return isSameCol &&
+              rowspanInfo[k] > 0 &&
+              rowspanInfo[k] === rowspanInfo[combo[i - 1]];
+          }
+
+          return row[k] === row[combo[i - 1]];
+        });
+
+        if (matched) {
+          combo.forEach((k, i) => {
+            result[k] = i === 0 ? combo.length : 0;
+          });
+          break;
+        }
+      }
+
+      return result;
+    };
+
+    // 处理表格数据（添加跨行、跨列信息）
+    const tableData = orderData.map((item, index, arr) => {
+      const spanInfo: { rowspan: SpanInfo, colspan: SpanInfo } = {
+        rowspan: {},
+        colspan: {}
+      };
+      // 获取当前层级数据
+      const levelInfoArr = getLevelInfo(item);
 
       if (index === 0) {  // 首行直接赋值 rowspan 数据
         rowMergeKeys.forEach((key, i) => {
-          item[this.alias].rowspan[key] = levelInfoArr[i].count;
+          spanInfo.rowspan[key] = levelInfoArr[i].count;
         });
 
+        spanInfo.colspan = getColspanInfo(spanInfo.rowspan, item);
+        item[this.alias] = spanInfo;
         return item;
       }
 
@@ -120,10 +145,12 @@ export default class MergeTableCells {
       rowMergeKeys.reduce((isLastSame: boolean, key, i) => {
         const isSame = isLastSame && isSameWithPrev(key);
 
-        item[this.alias].rowspan[key] = isSame ? 0 : levelInfoArr[i].count;
+        spanInfo.rowspan[key] = isSame ? 0 : levelInfoArr[i].count;
         return isSame;
       }, true);
 
+      spanInfo.colspan = getColspanInfo(spanInfo.rowspan, item);
+      item[this.alias] = spanInfo;
       return item;
     });
 

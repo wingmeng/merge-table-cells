@@ -1,0 +1,5 @@
+{
+  "name": "@local/test-data",
+  "version": "0.0.0",
+  "main": "./main.json"
+}

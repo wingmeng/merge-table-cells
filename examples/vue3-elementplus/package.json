@@ -1,0 +1,21 @@
+{
+  "name": "vue3-elementplus",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "element-plus": "^2.7.6",
+    "vue": "^3.4.29",
+    "merge-table-cells": "workspace:packages",
+    "@local/test-data": "workspace:examples"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "vite": "^5.3.1"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "native-table",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "merge-table-cells": "workspace:packages",
+    "@local/test-data": "workspace:examples"
+  },
+  "devDependencies": {
+    "vite": "^5.3.1"
+  }
+}
