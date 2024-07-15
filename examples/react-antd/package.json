@@ -10,10 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@local/test-data": "workspace:examples",
+    "antd": "^5.19.2",
     "merge-table-cells": "workspace:packages",
-    "@local/test-data": "workspace:examples"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

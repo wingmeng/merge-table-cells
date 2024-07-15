@@ -8,7 +8,7 @@
     "start": "concurrently \"npm run start:vue3\" \"npm run start:native\" \"npm run start:vue2\" \"npm run start:angular\" \"npm run start:react\" \"npm run dev\"",
     "start:angular": "cd ../angular-tinyng && npm run start",
     "start:native": "cd ../native && npm run dev",
-    "start:react": "cd ../react && npm run dev",
+    "start:react": "cd ../react-antd && npm run dev",
     "start:vue2": "cd ../vue2-elementui && npm run dev",
     "start:vue3": "cd ../vue3-elementplus && npm run dev"
   },
