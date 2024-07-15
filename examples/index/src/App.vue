@@ -33,7 +33,7 @@ interface StatusInfo {
 const navs: Array<Nav> = [
   { title: 'Vue3 + ElementPlus', port: 5263, tag: 'vue3-elementplus' },
   { title: 'Vue2 + ElementUI', port: 5262, tag: 'vue2-elementui' },
-  { title: 'React', port: 5261, tag: 'react' },
+  { title: 'React + AntDesign', port: 5261, tag: 'react-antd' },
   { title: 'Angular + TinyNG', port: 5260, tag: 'angular-tinyng' },
   { title: '原生表格', port: 5259, tag: 'native' },
 ].map(nav => ({ ...nav, url: `http://localhost:${nav.port}` }));
