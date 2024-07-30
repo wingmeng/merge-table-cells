@@ -1,4 +1,4 @@
-# TableCellMerger
+# MergeTableCells
 
 一个简单、灵活的表格单元格合并库。支持跨行、跨列合并，支持 Vue2/Vue3、Angular、React 以及原生表格。
 
