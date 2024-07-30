@@ -12,7 +12,7 @@ declare class MergeTableCells {
    * @param mergeOptions - 单元格合并配置
    */
   constructor(mergeOptions: MergeOptions | string[]);
-  format(rwaData: any[], sortHandle?: Function): any[];
+  format(rawData: any[], sortHandle?: Function): any[];
   span(prop: string, row: any): { [key in MergeType]: number };
 }
 
